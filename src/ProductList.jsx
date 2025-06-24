@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
 import { addItem } from './CartSlice';
+import { useDispatch } from 'react-redux';
 
 
 
@@ -9,6 +10,7 @@ function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false);
     const [addedToCart, setAddedToCart] = useState({});
+    const dispatch = useDispatch();
 
       // State to control the visibility of the About Us page
 
@@ -245,7 +247,6 @@ function ProductList({ onHomeClick }) {
         onHomeClick();
     };
     
-
     const handleCartClick = (e) => {
         e.preventDefault();
         setShowCart(true); // Set showCart to true when cart icon is clicked
@@ -260,13 +261,16 @@ function ProductList({ onHomeClick }) {
         e.preventDefault();
         setShowCart(false);
     };
+
     const handleAddToCart = (product) => {
+        console.log('Product added to cart:', product);
         dispatch(addItem(product));
         setAddedToCart((prevState) => ({
             ...prevState,
             [product.name]: true,
         }));
-    }; 
+    };
+ 
 
     return (
         <div>
@@ -306,7 +310,7 @@ function ProductList({ onHomeClick }) {
                                         <div className="product-title">{plant.name}</div> {/* Display plant name */}
                                         {/* Display other plant details like description and cost */}
                                         <div className="product-description">{plant.description}</div> {/* Display plant description */}
-                                        <div className="product-cost">${plant.cost}</div> {/* Display plant cost */}
+                                        <div className="product-cost">{plant.cost}</div> {/* Display plant cost */}
                                         <button
                                             className="product-button"
                                             onClick={() => handleAddToCart(plant)} // Handle adding plant to cart
