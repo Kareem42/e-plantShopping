@@ -263,7 +263,7 @@ function ProductList({ onHomeClick }) {
     };
 
     const handleAddToCart = (product) => {
-        console.log('Product added to cart:', product);
+        console.log('Product added to cart:', product); // Log the product being added
         dispatch(addItem(product));
         setAddedToCart((prevState) => ({
             ...prevState,
