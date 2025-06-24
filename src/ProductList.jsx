@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
-import { addItem } from './CartSlice';
+import { addItem, removeItem } from './CartSlice';
 import { useDispatch } from 'react-redux';
 
 
@@ -270,6 +270,13 @@ function ProductList({ onHomeClick }) {
             [product.name]: true,
         }));
     };
+
+    const calculateTotalQuantity = () => {
+        dispatch(addItem(product));
+        dispatch(removeItem(item.name));
+        return CartItem ? CartItem.reduce((total, item) => total + item.quantity, 0) : 0;
+        
+    };
  
 
     return (
@@ -296,7 +303,7 @@ function ProductList({ onHomeClick }) {
                 <div className="product-grid">
                     {plantsArray.map((category, index) => ( // Loop through each category in plantsArray
                         <div key={index}> {/* Unique key for each category div */}
-                            <h1>
+                            <h1 className="product-category"> {/* Category title */}
                                 <div>{category.category}</div> {/* Display the category name */}
                             </h1>
                             <div className="product-list"> {/* Container for the list of plant cards */}
