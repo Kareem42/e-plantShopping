@@ -258,3 +258,9 @@ body {
         text-align: center; /* Align text to the center */
       }
   }
+
+.product-button:disabled {
+    background-color: gray; /* Gray-out effect */
+    cursor: not-allowed; /* Change cursor to indicate disabled state */
+    opacity: 0.6; /* Reduce opacity for a disabled look */
+}
